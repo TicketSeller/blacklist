@@ -17,6 +17,16 @@ class UsersController < ApplicationController
     @users = User.find_black_list
   end
 
+  def import
+    file = params[:file]
+    if file.nil?
+      redirect_to users_path, alert: 'No file selected'
+    else
+      UserCsvImport.new.call(file)
+      redirect_to users_path, notice: 'Users imported'
+    end
+  end
+
   def search
     phone = params[:number]
     if User.exists?(phone: phone)
