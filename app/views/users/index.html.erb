@@ -1,6 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Users</h1>
+
+
+<h1>Users List</h1>
 <table>
   <tr>
     <th><%= link_to "Non Black User", :sort => "non_black"%> </th>
@@ -9,8 +12,11 @@
   </tr>
   <% @users.each do |user| %>
     <tr>
-      <td><%= render user %></td>
+      <td><%= render user %>
+        <%= link_to "Edit this user", edit_user_path(user) %>
+      </td>
     </tr>
+
   <% end %>
 </table>
 
