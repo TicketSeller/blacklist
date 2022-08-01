@@ -14,8 +14,17 @@ class UsersController < ApplicationController
   end
 
   def blacklist
-    # @users = User.all
     @users = User.find_black_list
+
+  end
+
+  def search
+    if params[:number].blank?
+
+      redirect_to new
+    else
+      @user = User.find_by(phone: params[:number])
+    end
   end
 
   # GET /users/1 or /users/1.json
@@ -76,6 +85,6 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:name, :phone, :description, :black_list)
+    params.require(:user).permit(:name, :phone, :description, :black_list, :number)
   end
 end
