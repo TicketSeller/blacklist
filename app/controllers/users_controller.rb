@@ -15,15 +15,14 @@ class UsersController < ApplicationController
 
   def blacklist
     @users = User.find_black_list
-
   end
 
   def search
-    if params[:number].blank?
-
-      redirect_to new
+    phone = params[:number]
+    if User.exists?(phone: phone)
+      @user = User.find_by!(phone: phone)
     else
-      @user = User.find_by(phone: params[:number])
+      redirect_to search_path, notice: 'User is not existing'
     end
   end
 
