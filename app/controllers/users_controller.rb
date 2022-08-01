@@ -3,7 +3,11 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    @users = User.find_non_black_list
+  end
+
+  def black_list
+    @users = User.find_black_list
   end
 
   # GET /users/1 or /users/1.json
